@@ -25,6 +25,7 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
+
 class _MyHomePageState extends State<MyHomePage> {
   final _formKey = GlobalKey<FormState>();
   final _firstNameController = TextEditingController();
@@ -38,13 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.blue, // This changes the AppBar color
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [Color.fromARGB(255, 49, 49, 49),Color.fromARGB(255, 0, 0, 0)],
-          ),
-        ),
+        color: Colors.grey[200], // This changes the background color
         child: Form(
           key: _formKey,
           child: Column(
@@ -86,10 +81,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     if (_formKey.currentState!.validate()) {
                       String firstName = _firstNameController.text;
                       String lastName = _lastNameController.text;
-                      Navigator.pushNamed(
+                      Navigator.push(
                         context,
-                        '/details',
-                        arguments: {'firstName': firstName, 'lastName': lastName},
+                        MaterialPageRoute(
+                          builder: (context) => DetailScreen(
+                              firstName: firstName, lastName: lastName),
+                        ),
                       );
                     }
                   },
