@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_udemy_project1/detailScreen.dart';
 
+import 'package:flutter_udemy_project1/latest_news.dart';
+import 'package:flutter_udemy_project1/subscriptionScreen.dart';
+import 'package:flutter_udemy_project1/profileScreen.dart';
+
 void main() {
   runApp(
     MaterialApp(
@@ -35,15 +39,70 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Form Validation Home Page'),
-        backgroundColor: Colors.blue, // This changes the AppBar color
+        title: const Text(
+          'The Hindu',
+          style: TextStyle(
+            color: Colors.white, // Change this to your desired color
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 168, 11, 0),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 168, 11, 0),
+              ),
+              child: Text(
+                'The Hindu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.account_circle),
+              title: const Text('Profile'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.subscriptions_outlined),
+              title: const Text('subscription'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SubscriptionScreen(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
       body: Container(
-        color: Colors.grey[200], // This changes the background color
+        color: const Color.fromARGB(
+            255, 255, 255, 255), // This changes the background color
         child: Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
+              Image.asset(
+                'lib/assets/images/appbanner.jpg',
+                fit: BoxFit.cover,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
@@ -93,9 +152,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: ElevatedButton.styleFrom(
                     elevation: 10.0,
                   ),
-                  child: Text('Submit'),
+                  child: const Text('Submit'),
                 ),
               ),
+              LatestNews(),
             ],
           ),
         ),
@@ -103,3 +163,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
